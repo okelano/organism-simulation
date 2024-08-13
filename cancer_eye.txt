@@ -1,0 +1,34 @@
+Cancer-Eye - GLOBOCAN 2020 database - Input, pre-processing ( ViT-Patch), feature selection(Fisher-score), classification(K-means), Output(CSV-report(F1-score metrics))
+
+Features:
+
+- Medical imaging
+- Behaviour
+- Health records
+- Clinical records
+- Research
+- Pandemic control
+- Diagnosis
+- Drug discovery
+
+## Choosing model
+
+VIT-patch vision transformer with JAX, PyTorch 
+- https://huggingface.co/docs/transformers/model_doc/vit
+- https://huggingface.co/google/vit-base-patch16-224
+
+
+## How to train a model on custom data-set?
+
+How to rain VIT-patch?
+
+- https://github.com/kentaroy47/vision-transformers-cifar10
+
+## How to train model for classification and reporting:
+
+https://medium.com/@yanis.labrak/how-to-train-a-custom-vision-transformer-vit-image-classifier-to-help-endoscopists-in-under-5-min-2e7e4110a353
+
+## cancer data for the model
+
+https://www.uicc.org/news/globocan-2020-global-cancer-data
+https://www.uicc.org/
