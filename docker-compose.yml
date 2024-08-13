@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: organism_simulation_web
+    command: gunicorn simulation.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - db
+    environment:
+      - DJANGO_SETTINGS_MODULE=simulation.settings
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+  db:
+    image: postgres:15-alpine
+    container_name: organism_simulation_db
+    environment:
+      POSTGRES_USER: sim_user
+      POSTGRES_PASSWORD: sim_password
+      POSTGRES_DB: sim_db
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:latest
+    container_name: organism_simulation_redis
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    container_name: organism_simulation_celery
+    command: celery -A simulation worker --loglevel=info
+    depends_on:
+      - web
+      - redis
+
+  ansible:
+    build: .
+    container_name: organism_simulation_ansible
+    command: ansible-playbook ansible/playbook.yml -i ansible/inventory
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - web
+
+volumes:
+  pgdata:

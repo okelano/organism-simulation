@@ -1,0 +1,16 @@
+# ansible/playbook.yml
+- hosts: localhost
+  tasks:
+    - name: Ensure Python 3 is installed
+      package:
+        name: python3
+        state: present
+
+    - name: Ensure pip is installed
+      package:
+        name: python3-pip
+        state: present
+
+    - name: Install Django requirements
+      pip:
+        requirements: /usr/src/app/requirements.txt
