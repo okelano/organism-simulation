@@ -3,6 +3,8 @@
 ## Overview
 
 This application simulates biological processes using Django, Celery, and Redis. It includes Docker and Ansible setups for deployment and configuration.
+
+````bash
 organism-simulation/
 │
 ├── Dockerfile                   # Dockerfile to build the Docker image for the application environment.
@@ -56,7 +58,7 @@ organism-simulation/
 │   ├── views.py                 # Contains views to handle the web requests.
 │   ├── tests.py                 # Contains unit tests for the application.
 │   └── ...                      # Placeholder for additional files or submodules.
-
+````
 
 ## Getting Started
 
